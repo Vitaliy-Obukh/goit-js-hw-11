@@ -1,4 +1,3 @@
-// Функції інтерфейсу
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
@@ -9,6 +8,9 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
+
+const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 
 export function createImageMarkup(images) {
   return images
@@ -38,9 +40,21 @@ export function createImageMarkup(images) {
 }
 
 export function updateGallery(images) {
-  const gallery = document.querySelector('.gallery');
+  clearGallery();
   gallery.innerHTML = createImageMarkup(images);
-  lightbox.refresh(); 
+  lightbox.refresh();
+}
+
+export function clearGallery() {
+  gallery.innerHTML = '';
+}
+
+export function showLoader() {
+  loader.style.display = 'block';
+}
+
+export function hideLoader() {
+  loader.style.display = 'none';
 }
 
 export function showNoResultsMessage(message) {
